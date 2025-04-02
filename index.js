@@ -3,6 +3,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const layouts = require('express-ejs-layouts');
+app.use(layouts);
+app.set('layout','layouts/layout');
+
 app.use(express.static(path.join(__dirname,'public')));
 
 const mainRouter = require('./src/routers/main.router');
