@@ -7,7 +7,9 @@ const getProductos =  (req, res) => {
     //const limit = req.query.limit;
     fetch('https://fakestoreapi.com/products?' + query)
     .then(res => res.json())
-    .then(productos => res.json(productos));
+    .then(productos => {
+        res.render('productos')
+    });
 };
 
 const getProductosId =  (req, res) => {
