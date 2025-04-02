@@ -8,7 +8,7 @@ const getProductos =  (req, res) => {
     fetch('https://fakestoreapi.com/products?' + query)
     .then(res => res.json())
     .then(productos => {
-        res.render('productos')
+        res.render('productos',{productos})
     });
 };
 
