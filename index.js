@@ -15,7 +15,11 @@ app.use('/', mainRouter);
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,'src/views'));
 
+
+
 app.use("/productos",require('./src/routers/productos.router'));
+app.use("/contacto",require('./src/routers/contacto.router'));
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () =>console.log(`http://localhost:${PORT}`));
