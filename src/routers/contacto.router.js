@@ -4,5 +4,6 @@ const controller = require('../controllers/contacto.controller');
 
 
 router.get('/',controller.index);
+router.post('/',controller.submit);
 
 module.exports = router;

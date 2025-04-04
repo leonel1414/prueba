@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+app.use(express.urlencoded(extendsed = false));
+
 const layouts = require('express-ejs-layouts');
 app.use(layouts);
 app.set('layout','layouts/layout');
