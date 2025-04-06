@@ -21,6 +21,7 @@ app.set('views', path.join(__dirname,'src/views'));
 
 app.use("/productos",require('./src/routers/productos.router'));
 app.use("/contacto",require('./src/routers/contacto.router'));
+app.use("/categorias",require('./src/routers/categorias.router'));
 
 
 const PORT = process.env.PORT || 3001;

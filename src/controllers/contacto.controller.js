@@ -11,11 +11,11 @@ const submit = async (req, res) => {
     res.send('Formulario enviado');
 
     const transporter = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
         auth: {
-          user: "ef94456e0964e4",
-          pass: "f5693580f94f77"
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
     },
     });
 
