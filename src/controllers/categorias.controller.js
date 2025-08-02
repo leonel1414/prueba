@@ -67,6 +67,8 @@ const destroy = (req, res) => {
     
     categorias.splice(categoriaIndex, 1);
     res.redirect('/categorias');
+
+    
 }
 
 module.exports = {
