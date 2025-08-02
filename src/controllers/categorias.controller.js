@@ -34,7 +34,14 @@ const store = (req,res) => {
 }
 
 const edit = (req,res) =>{
-    res.send('Editar categoria');
+    const {id} = req.params;
+    const categoria = categorias.find(categoria => categoria.id == id);
+    
+    if(!categoria){
+        return res.status(404).send('Categoria no encontrada');
+    }
+    
+    res.render('categorias/edit', {categoria});
 }
 
 module.exports = {
