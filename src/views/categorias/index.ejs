@@ -11,7 +11,11 @@
         <% categorias.forEach(categoria =>{ %>
             <tr>
                 <td><a href="/categorias/<%= categoria.id %>"><%= categoria.id %> <%= categoria.nombre %></a></td>
-                <td><a href="/categorias/<%= categoria.id %>/edit">Editar</a></td>
+                <td><a href="/categorias/<%= categoria.id %>/edit">Editar</a> |
+                    <form action="/categorias/<%= categoria.id %>?_method=DELETE" method="post">
+                        <button type="submit">Borra</button>
+                    </form>
+                </td>
             </tr>
         <% }) %>
     </tbody>
