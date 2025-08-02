@@ -57,12 +57,25 @@ const update = (req, res) => {
     res.redirect('/categorias');
 }
 
+const destroy = (req, res) => {
+    const {id} = req.params;
+    const categoriaIndex = categorias.findIndex(categoria => categoria.id == id);
+    
+    if(categoriaIndex === -1){
+        return res.status(404).send('Categoria no encontrada');
+    }
+    
+    categorias.splice(categoriaIndex, 1);
+    res.redirect('/categorias');
+}
+
 module.exports = {
     index,
     show,
     create,
     store,
     edit,
-    update
+    update,
+    destroy
 };
 
