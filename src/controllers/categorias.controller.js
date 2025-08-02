@@ -44,11 +44,25 @@ const edit = (req,res) =>{
     res.render('categorias/edit', {categoria});
 }
 
+const update = (req, res) => {
+    const {id} = req.params;
+    const {nombre} = req.body;
+    const categoria = categorias.find(categoria => categoria.id == id);
+    
+    if(!categoria){
+        return res.status(404).send('Categoria no encontrada');
+    }
+    
+    categoria.nombre = nombre;
+    res.redirect('/categorias');
+}
+
 module.exports = {
     index,
     show,
     create,
     store,
-    edit
+    edit,
+    update
 };
 
