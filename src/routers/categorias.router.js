@@ -8,6 +8,8 @@ router.post('/', controller.store);
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 
+//editar
+router.get('/:id/edit',controller.edit);
 
 
 module.exports = router;

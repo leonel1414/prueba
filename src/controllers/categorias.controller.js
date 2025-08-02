@@ -33,9 +33,14 @@ const store = (req,res) => {
     res.redirect('/categorias');
 }
 
+const edit = (req,res) =>{
+    res.send('Editar categoria');
+}
+
 module.exports = {
     index,
     show,
     create,
     store,
-}
+    edit
+};

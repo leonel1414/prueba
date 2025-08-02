@@ -10,8 +10,8 @@
     <tbody>
         <% categorias.forEach(categoria =>{ %>
             <tr>
-                <td><a href="/categorias/<%= categoria.id %>"><%= categoria.id %></a></td>
-                <td><%= categoria.nombre %></td>
+                <td><a href="/categorias/<%= categoria.id %>"><%= categoria.id %> <%= categoria.nombre %></a></td>
+                <td><a href="/categorias/<%= categoria.id %>/edit">Editar</a></td>
             </tr>
         <% }) %>
     </tbody>
