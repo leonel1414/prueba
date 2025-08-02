@@ -22,9 +22,9 @@
 </table>
 
 <script>
-    document.addEventListener('Submit',(event) =>{
+    document.addEventListener('submit',(event) =>{
         event.preventDefault();
-        if(event.target,classList.contains('form-delete')){
+        if(event.target.classList.contains('form-delete')){
             if(confirm("¿Estás seguro de que quieres eliminar esta categoría?")){
                 event.target.submit();
             }
