@@ -6,10 +6,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const categorias = [];
+let categorias = [];
 
 
 const index = (req,res) => {
+    const categorias = fs.readFileSync(path.resolve(__dirname, '../../categorias.js'))
     res.render('categorias/index',{categorias});
 };
 
