@@ -10,11 +10,15 @@ let categorias = [];
 
 
 const index = (req,res) => {
-    const categorias = fs.readFileSync(path.resolve(__dirname, '../../categorias.js'))
+    // de un archivo JSON a un array
+    const categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../categorias.js'), 'utf-8'));
     res.render('categorias/index',{categorias});
 };
 
 const show = (req,res) => {
+
+    const categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../categorias.js'), 'utf-8'));
+
     const {id} = req.params;
     const categoria = categorias.find(categoria => categoria.id == id);
     console.log(categoria);
@@ -46,6 +50,9 @@ const store = (req,res) => {
 }
 
 const edit = (req,res) =>{
+
+    const categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../categorias.js'), 'utf-8'));
+
     const {id} = req.params;
     const categoria = categorias.find(categoria => categoria.id == id);
     
@@ -57,6 +64,8 @@ const edit = (req,res) =>{
 }
 
 const update = (req, res) => {
+    const categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../categorias.js'), 'utf-8'));
+
     const {id} = req.params;
     const {nombre} = req.body;
     const categoria = categorias.find(categoria => categoria.id == id);
@@ -66,10 +75,14 @@ const update = (req, res) => {
     }
     
     categoria.nombre = nombre;
+    // guardar archivo en JSON
+    fs.writeFileSync(path.resolve(__dirname, '../../categorias.js'), JSON.stringify(categorias));
     res.redirect('/categorias');
 }
 
 const destroy = (req, res) => {
+    const categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../categorias.js'), 'utf-8'));
+
     const {id} = req.params;
     const categoriaIndex = categorias.findIndex(categoria => categoria.id == id);
     
@@ -78,6 +91,10 @@ const destroy = (req, res) => {
     }
     
     categorias.splice(categoriaIndex, 1);
+
+    // guardar archivo en JSON
+    fs.writeFileSync(path.resolve(__dirname, '../../categorias.js'), JSON.stringify(categorias));
+
     res.redirect('/categorias');
 
     
