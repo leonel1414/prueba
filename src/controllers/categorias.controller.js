@@ -1,7 +1,13 @@
-const categorias = [
+/*const categorias = [
     {id:1,nombre:'categoria 1'},
     {id:2,nombre:'categoria 2'},
-    {id:3,nombre:'categoria 3'}];
+    {id:3,nombre:'categoria 3'}
+];*/
+const fs = require('fs');
+const path = require('path');
+
+const categorias = [];
+
 
 const index = (req,res) => {
     res.render('categorias/index',{categorias});
@@ -30,6 +36,11 @@ const store = (req,res) => {
         nombre,
     };
     categorias.push(categoria);
+
+    // guardar archivo en JSON 
+    fs.writeFileSync(path.resolve(__dirname, '../../categorias.js'),JSON.stringify(categorias))
+
+
     res.redirect('/categorias');
 }
 
