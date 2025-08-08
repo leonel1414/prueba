@@ -1,33 +1,40 @@
-<h1>Listado de Categorias</h1>
+<h1>Listado de Categorías</h1>
 
-<a href="/categorias/create">Crear una categoria</a>
-<table>
-    <thead>
+<a class="button button--primary" href="/categorias/create">Crear una categoría</a>
+
+<section class="categorias">
+    <table>
+        <thead>
         <tr>
-            <th>Nombre de Categoria</th>
+            <th>Nombre</th>
+            <th></th>
         </tr>
-    </thead>
-    <tbody>
-        <% categorias.forEach(categoria =>{ %>
-            <tr>
-                <td><a href="/categorias/<%= categoria.id %>"><%= categoria.id %> <%= categoria.nombre %></a></td>
-                <td><a href="/categorias/<%= categoria.id %>/edit">Editar</a> |
-                    <form class="form-delete" action="/categorias/<%= categoria.id %>?_method=DELETE" method="post">
-                        <button type="submit">Borrar</button>
-                    </form>
-                </td>
-            </tr>
-        <% }) %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <% categorias.forEach(categoria => { %>
+        <tr>
+            <td>
+            <a href="/categorias/<%= categoria.id %>"><%= categoria.nombre %></a>
+            </td>
+            <td class="cell-inline">
+            <a class="button button--primary" href="/categorias/<%= categoria.id %>/edit">Edit</a>
+            <form class="form-delete" action="/categorias/<%= categoria.id %>?_method=DELETE" method="post">
+                <button class="button button--danger" type="submit">Borrar</button>
+            </form>
+            </td>
+        </tr><% }) %>
+        </tbody>
+    </table>
+</section>
 
 <script>
-    document.addEventListener('submit',(event) =>{
+    document.addEventListener("submit", (event) => {
         event.preventDefault();
-        if(event.target.classList.contains('form-delete')){
-            if(confirm("¿Estás seguro de que quieres eliminar esta categoría?")){
+
+        if (event.target.classList.contains("form-delete")) {
+            if (confirm("¿Esta seguro?")) {
                 event.target.submit();
             }
         }
-    })
+    });
 </script>
