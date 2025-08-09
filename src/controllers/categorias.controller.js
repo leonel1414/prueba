@@ -1,6 +1,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const model = require('../models/category');
 
 let categorias = [];
 
@@ -9,10 +10,20 @@ const create = (req, res) => {
 };
 
 const store = (req, res) => {
-    const { nombre } = req.body;
+    const { name } = req.body;
 
+    model.create(name,(error,id) =>{
+
+        if(error){
+            //return console.error(error);
+            return res.status(500).send("Error al crear la categoría");
+        }
+        console.log(`Categoría creada con ID: ${id}`);
+        res.redirect("/categorias");
+    });
+//minutos 24:21
     // Leer las categorías existentes antes de agregar la nueva
-    try {
+    /* try {
         categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8"));
 
     } catch (error) {
@@ -32,7 +43,7 @@ const store = (req, res) => {
         JSON.stringify(categorias)
     );
 
-    res.redirect("/categorias");
+    res.redirect("/categorias");*/
 };
 
 const index = (req, res) => {
