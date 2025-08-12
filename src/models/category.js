@@ -13,6 +13,21 @@ const create = (name, callback) =>{
     });
 }
 
+const findAll = (callback) =>{
+
+    const sql = `SELECT * FROM categorias`;
+
+    db.all(sql,(error,rows) => {
+
+        if(error){
+            return callback(error);
+        }
+        callback(null, rows);
+    });
+
+};
+
 module.exports = {
-    create
+    create,
+    findAll
 };

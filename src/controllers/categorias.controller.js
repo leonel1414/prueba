@@ -21,41 +21,19 @@ const store = (req, res) => {
         console.log(`Categoría creada con ID: ${id}`);
         res.redirect("/categorias");
     });
-//minutos 24:21
-    // Leer las categorías existentes antes de agregar la nueva
-    /* try {
-        categorias = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8"));
 
-    } catch (error) {
-        
-        categorias = [];
-    }
-
-    const categoria = {
-        id: Date.now(),
-        nombre,
-    };
-
-    categorias.push(categoria);
-
-    fs.writeFileSync(
-        path.resolve(__dirname, "../../categorias.json"),
-        JSON.stringify(categorias)
-    );
-
-    res.redirect("/categorias");*/
 };
 
 const index = (req, res) => {
-    try {
-        categorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
-        );
-    } catch (error) {
-        categorias = [];
-    }
 
-    res.render("categorias/index", { categorias });
+    model.findAll((error, categorias) => {
+
+        if(error){
+            return res.status(500).send("Error al obtener las categorías");
+        }
+        res.render("categorias/index", { categorias });
+
+    });
 };
 
 const show = (req, res) => {
