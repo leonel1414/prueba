@@ -48,12 +48,13 @@ const show = (req, res) => {
         if(!categoria){
             return res.status(404).send("No existe la categoria");
         }
-        
+
         res.render("categorias/show", { categoria });
 
     });
 };
 
+//35:09
 const edit = (req, res) => {
     categorias = JSON.parse(
         fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
