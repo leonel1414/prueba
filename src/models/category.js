@@ -27,7 +27,21 @@ const findAll = (callback) =>{
 
 };
 
+const findById = (id, callback) =>{
+
+    const sql = `SELECT * FROM categorias WHERE id = ?`;
+
+    db.get(sql, [id],(error,row)=> {
+
+        if(error){
+            return callback(error);
+        }
+        callback(null, row);
+    });
+}
+
 module.exports = {
     create,
-    findAll
+    findAll,
+    findById
 };

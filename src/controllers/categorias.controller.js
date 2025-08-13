@@ -37,20 +37,21 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-    categorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
-    );
 
     const { id } = req.params;
 
-    const categoria = categorias.find((categoria) => categoria.id == id);
-    //   console.log(categoria);
+    model.findById(id,(error, categoria)=>{
+        if(error){
+            return res.status(500).send("Error al obtener las categorías");
+        }
 
-    if (!categoria) {
-        return res.status(404).send("No existe la categoria");
-    }
+        if(!categoria){
+            return res.status(404).send("No existe la categoria");
+        }
+        
+        res.render("categorias/show", { categoria });
 
-    res.render("categorias/show", { categoria });
+    });
 };
 
 const edit = (req, res) => {
