@@ -1,9 +1,8 @@
 
-const fs = require('fs');
-const path = require('path');
+
 const model = require('../models/category');
 
-let categorias = [];
+
 
 const create = (req, res) => {
     res.render("categorias/create");
