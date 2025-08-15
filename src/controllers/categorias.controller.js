@@ -85,32 +85,24 @@ const update = (req, res) => {
         }
 
         console.log(changes);
-        
+
         res.redirect("/categorias");
     });
 };
 
 const destroy = (req, res) => {
-    categorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
-    );
 
     const { id } = req.params;
 
-    const index = categorias.findIndex((categoria) => categoria.id == id);
+    model.destroy(id,(error, changes) =>{
+        if(error){
+            return res.status(500).send("Error al eliminar la categoría");
+        }
 
-    if (index == -1) {
-        return res.status(404).send("No existe la categoria");
-    }
-
-    categorias.splice(index, 1);
-
-    fs.writeFileSync(
-        path.resolve(__dirname, "../../categorias.json"),
-        JSON.stringify(categorias)
-    );
-
-    res.redirect("/categorias");
+        console.log(`Categoría eliminada, cambios: ${changes}`);
+        
+        res.redirect("/categorias");
+    });
 };
 
 module.exports = {

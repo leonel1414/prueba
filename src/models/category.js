@@ -53,9 +53,23 @@ const update = (id,name,callback) =>{
     });
 }
 
+const destroy = (id, callback) =>{
+
+    const sql = `DELETE FROM categorias WHERE id = ?`;
+
+    db.run(sql, [id], function (error){
+
+        if(error){
+            return callback(error);
+        }
+        callback(null, this.changes);
+    });
+}
+
 module.exports = {
     create,
     findAll,
     findById,
-    update
+    update,
+    destroy
 };
