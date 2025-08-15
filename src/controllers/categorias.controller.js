@@ -56,43 +56,38 @@ const show = (req, res) => {
 
 
 const edit = (req, res) => {
-    categorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
-    );
 
     const { id } = req.params;
 
-    const categoria = categorias.find((categoria) => categoria.id == id);
+    model.findById(id,(error, categoria)=>{
+        if(error){
+            return res.status(500).send("Error al obtener las categorías");
+        }
 
-    if (!categoria) {
-        return res.status(404).send("No existe la categoria");
-    }
+        if(!categoria){
+            return res.status(404).send("No existe la categoria");
+        }
 
-    res.render("categorias/edit", { categoria });
+        res.render("categorias/edit", { categoria });
+
+    });
 };
 
 const update = (req, res) => {
-    categorias = JSON.parse(
-        fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
-    );
 
     const { id } = req.params;
-    const { nombre } = req.body;
+    const { name } = req.body;
 
-    const categoria = categorias.find((categoria) => categoria.id == id);
+    model.update(id,name,(error,changes) =>{
 
-    if (!categoria) {
-        return res.status(404).send("No existe la categoria");
-    }
+        if(error){
+            return res.status(500).send("Error al actualizar la categoría");
+        }
 
-    categoria.nombre = nombre;
-
-    fs.writeFileSync(
-        path.resolve(__dirname, "../../categorias.json"),
-        JSON.stringify(categorias)
-    );
-
-    res.redirect("/categorias");
+        console.log(changes);
+        
+        res.redirect("/categorias");
+    });
 };
 
 const destroy = (req, res) => {
