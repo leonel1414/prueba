@@ -40,8 +40,22 @@ const findById = (id, callback) =>{
     });
 }
 
+const update = (id,name,callback) =>{
+
+    const sql = `UPDATE categorias SET name = ? WHERE id = ?`;
+
+    db.run(sql, [name,id], function(error){
+
+        if(error){
+            return callback(error);
+        }
+        callback(null, this.changes);
+    });
+}
+
 module.exports = {
     create,
     findAll,
-    findById
+    findById,
+    update
 };

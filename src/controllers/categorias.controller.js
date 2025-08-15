@@ -54,7 +54,7 @@ const show = (req, res) => {
     });
 };
 
-//35:09
+
 const edit = (req, res) => {
     categorias = JSON.parse(
         fs.readFileSync(path.resolve(__dirname, "../../categorias.json"), "utf-8")
