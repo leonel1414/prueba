@@ -5,6 +5,10 @@ const create = (req,res) =>{
     res.render('productos/create');
 }
 
+const store = (req,res) => {
+
+}
+
 const getProductos =  (req, res) => {
     const query = querystring.stringify(req.query);
 
@@ -25,7 +29,8 @@ const getProductosId =  (req, res) => {
 module.exports = {
     getProductos,
     getProductosId,
-    create
+    create,
+    store
 };
 
 //12:02
