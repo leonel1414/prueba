@@ -27,8 +27,52 @@ const findAll = async () => {
     }
 }
 
+const findById = async (id) => {
+
+    const sql = 'SELECT * FROM products WHERE id = ?';
+
+    try {
+
+        const [rows] = await pool.query(sql, [id]);
+        console.log(rows)
+        return rows.shift();
+
+    } catch (error) {
+        throw error;
+    }
+};
+
+const update = async (id, name) =>{
+
+    const sql = 'UPDATE products SET name = ? WHERE id = ?';
+
+    try {
+        const [result] = await pool.query(sql, [name,id]);
+        return result;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+const destroy = async (id) => {
+
+    const sql = 'DELETE FROM products WHERE id = ?';
+
+    try {
+        const [result] = await pool.query(sql, [id]);
+        return result;
+
+    } catch (error) {
+        throw error;
+    }
+
+}
 
 module.exports = {
     store,
-    findAll
+    findAll,
+    findById,
+    update,
+    destroy
 };

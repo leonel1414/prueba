@@ -9,7 +9,11 @@ router.post('/',controller.store);
 router.get('/',controller.getProductos);
 router.get('/:id',controller.getProductosId);
 
+router.get('/edit/:id',controller.edit);
+router.put('/:id',controller.update);
+
+router.delete('/:id',controller.destroy);
+
 module.exports = router;
 
 
-//14:58
