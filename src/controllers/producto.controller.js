@@ -6,6 +6,7 @@ const create = (req,res) =>{
 }
 
 const store = (req,res) => {
+    const {name} = req.body;
 
 }
 
