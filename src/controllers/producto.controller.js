@@ -25,15 +25,17 @@ const store = async (req,res) => {
 
 };
 
-const getProductos =  (req, res) => {
-    const query = querystring.stringify(req.query);
+const getProductos = async (req, res) => {
+    try {
 
-    //const limit = req.query.limit;
-    fetch('https://fakestoreapi.com/products?' + query)
-    .then(res => res.json())
-    .then(productos => {
-        res.render('productos',{productos})
-    });
+        const productos = await model.findAll();
+        res.render('productos', { productos });
+
+    } catch (error) {
+        
+        console.error(error);
+        res.status(500).send('Error al obtener los productos');
+    }
 };
 
 const getProductosId =  (req, res) => {
