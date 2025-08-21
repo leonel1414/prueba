@@ -29,10 +29,10 @@ const getProductos = async (req, res) => {
     try {
 
         const productos = await model.findAll();
-        res.render('productos', { productos });
+        res.render('productos/index', { productos });
 
     } catch (error) {
-        
+
         console.error(error);
         res.status(500).send('Error al obtener los productos');
     }
@@ -51,4 +51,4 @@ module.exports = {
     store
 };
 
-//12:02
+//31:41
