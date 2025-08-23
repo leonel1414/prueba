@@ -23,8 +23,21 @@ const store = (req, res) => {
 
 };
 
-const index = (req, res) => {
+const index = async (req, res) => {
 
+    try {
+
+        const categorias = await model.findAll();
+        res.render("categorias/index", { categorias });
+
+    } catch (error) {
+        
+        console.error(error);
+        return res.status(500).send("Error al obtener las categorías");
+    }
+
+
+    /*
     model.findAll((error, categorias) => {
 
         if(error){
@@ -33,6 +46,7 @@ const index = (req, res) => {
         res.render("categorias/index", { categorias });
 
     });
+*/
 };
 
 const show = (req, res) => {

@@ -1,4 +1,4 @@
-const db = require('../models/sqlite');
+/*const db = require('../models/sqlite');
 
 const create = (name, callback) =>{
 
@@ -66,10 +66,32 @@ const destroy = (id, callback) =>{
     });
 }
 
-module.exports = {
+/*module.exports = {
     create,
     findAll,
     findById,
     update,
     destroy
 };
+*/
+
+
+
+//Sequelize
+const {DataTypes} = require('sequelize');
+const sequelize = require('./sequelize');
+
+
+
+const Category = sequelize.define('category',{
+    name:{
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+});
+
+
+
+
+
+module.exports = Category;
