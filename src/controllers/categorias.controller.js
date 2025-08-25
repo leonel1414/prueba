@@ -8,10 +8,24 @@ const create = (req, res) => {
     res.render("categorias/create");
 };
 
-const store = (req, res) => {
+const store = async (req, res) => {
     const { name } = req.body;
 
-    model.create(name,(error,id) =>{
+    try {
+
+        const categorias = await model.create({name});
+        res.redirect('/categorias');
+
+    } catch (error) {
+
+        console.error(error);
+        return res.status(500).send("Error al obtener las categorías");
+    }
+    
+
+
+
+    /*   model.create(name,(error,id) =>{
 
         if(error){
             //return console.error(error);
@@ -20,7 +34,7 @@ const store = (req, res) => {
         console.log(`Categoría creada con ID: ${id}`);
         res.redirect("/categorias");
     });
-
+*/
 };
 
 const index = async (req, res) => {
