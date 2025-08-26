@@ -22,7 +22,7 @@ const store = async (req, res) => {
         return res.status(500).send("Error al obtener las categorías");
     }
     
-
+//15min
 
 
     /*   model.create(name,(error,id) =>{
