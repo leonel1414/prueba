@@ -22,7 +22,7 @@ const store = async (req, res) => {
         return res.status(500).send("Error al obtener las categorías");
     }
     
-//15min
+
 
 
     /*   model.create(name,(error,id) =>{
@@ -63,10 +63,26 @@ const index = async (req, res) => {
 */
 };
 
-const show = (req, res) => {
+const show = async (req, res) => {
 
     const { id } = req.params;
 
+    try {
+        const categoria = await model.findByPk(id);
+        res.render("categorias/show", { categoria });
+
+
+
+        
+    } catch (error) {
+        
+        console.error(error);
+        return res.status(500).send("Error al obtener las categorías");
+    }
+
+
+
+    /*
     model.findById(id,(error, categoria)=>{
         if(error){
             return res.status(500).send("Error al obtener las categorías");
@@ -79,6 +95,7 @@ const show = (req, res) => {
         res.render("categorias/show", { categoria });
 
     });
+    */
 };
 
 
