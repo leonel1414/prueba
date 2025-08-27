@@ -49,7 +49,7 @@ const index = async (req, res) => {
         console.error(error);
         return res.status(500).send("Error al obtener las categorías");
     }
-
+//18:51
 
     /*
     model.findAll((error, categorias) => {
