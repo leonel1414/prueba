@@ -90,7 +90,7 @@ const Category = sequelize.define('category',{
     }
 });
 
-
+//26:12
 
 
 
