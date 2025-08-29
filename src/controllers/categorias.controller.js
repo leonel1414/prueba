@@ -101,10 +101,25 @@ const show = async (req, res) => {
 };
 
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
 
     const { id } = req.params;
 
+        try {
+
+            const categoria = await model.findByPk(id);
+            res.render("categorias/edit", { categoria });
+
+            if(!categoria){
+                return res.status(404).send("No existe la categoria");
+            }
+            
+        } catch (error) {
+            
+            console.error(error);
+            return res.status(500).send("Error al obtener las categorías");
+        }
+    /*
     model.findById(id,(error, categoria)=>{
         if(error){
             return res.status(500).send("Error al obtener las categorías");
@@ -117,13 +132,33 @@ const edit = (req, res) => {
         res.render("categorias/edit", { categoria });
 
     });
+    */    
 };
 
-const update = (req, res) => {
+const update = async (req, res) => {
 
     const { id } = req.params;
     const { name } = req.body;
 
+    try {
+
+        const result =  await model.update({name}, {where: {id}});
+        console.log(result);
+
+        if(!result){
+            return res.status(404).send("No existe la categoria");
+        }
+        res.redirect("/categorias");
+
+    } catch (error) {
+
+        console.error(error);
+        return res.status(500).send("Error al obtener las categorías");
+
+    }
+    
+    
+    /*
     model.update(id,name,(error,changes) =>{
 
         if(error){
@@ -134,13 +169,23 @@ const update = (req, res) => {
 
         res.redirect("/categorias");
     });
+    */
 };
 
-const destroy = (req, res) => {
+const destroy = async (req, res) => {
 
     const { id } = req.params;
 
-    model.destroy(id,(error, changes) =>{
+    const result = await model.destroy({where : {id}});
+    console.log(result);
+
+    if(!result){
+        return res.status(404).send("No existe la categoria");
+    }
+    
+    res.redirect("/categorias");
+
+    /*model.destroy(id,(error, changes) =>{
         if(error){
             return res.status(500).send("Error al eliminar la categoría");
         }
@@ -149,6 +194,7 @@ const destroy = (req, res) => {
         
         res.redirect("/categorias");
     });
+    */
 };
 
 module.exports = {
