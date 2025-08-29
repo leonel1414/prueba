@@ -49,7 +49,7 @@ const index = async (req, res) => {
         console.error(error);
         return res.status(500).send("Error al obtener las categorías");
     }
-//18:51
+
 
     /*
     model.findAll((error, categorias) => {
@@ -68,11 +68,13 @@ const show = async (req, res) => {
     const { id } = req.params;
 
     try {
+
         const categoria = await model.findByPk(id);
         res.render("categorias/show", { categoria });
 
-
-
+        if(!categoria){
+            return res.status(404).send("No existe la categoria");
+        }
         
     } catch (error) {
         
