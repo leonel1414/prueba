@@ -80,6 +80,7 @@ module.exports = {
 
 const {DataTypes} = require("sequelize");
 const sequelize = require("./sequelize");
+const Category = require("./category");
 
 const Product = sequelize.define("product",{
 

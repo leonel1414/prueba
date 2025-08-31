@@ -1,16 +1,27 @@
 
 const model = require('../models/product');
+const modelCategory = require('../models/category');
 
-const create = (req,res) =>{
-    res.render('productos/create');
-}
-
-const store = async (req,res) => {
-    const {name} = req.body;
+const create = async (req,res) =>{
 
     try {
 
-        const result = await model.store(name);
+        const categorias = await modelCategory.findAll();
+        res.render('productos/create', { categorias });
+
+    } catch (error) {
+
+        console.error(error);
+        res.status(500).send('Error en categorias');
+    }
+}
+
+const store = async (req,res) => {
+    const {name,categoryId} = req.body;
+
+    try {
+
+        const result = await model.create({name,categoryId});
 
         console.log(result);
 
