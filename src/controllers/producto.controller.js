@@ -38,7 +38,9 @@ const store = async (req,res) => {
 const getProductos = async (req, res) => {
     try {
 
-        const productos = await model.findAll();
+        const productos = await model.findAll({
+            include: "category"
+        });
         res.render('productos/index', { productos });
 
     } catch (error) {
