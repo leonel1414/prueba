@@ -1,4 +1,4 @@
-const querystring = require('querystring');
+
 const model = require('../models/product');
 
 const create = (req,res) =>{
