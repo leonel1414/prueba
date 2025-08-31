@@ -1,4 +1,4 @@
-const pool = require('./mysql');
+/*const pool = require('./mysql');
 
 const store = async (name) =>{
     const sql = 'INSERT INTO products (name) VALUES (?)'
@@ -76,3 +76,13 @@ module.exports = {
     update,
     destroy
 };
+*/
+
+const {DataTypes} = require("sequelize");
+const sequelize = require("./sequelize");
+
+const Product = sequelize.define("product",{
+
+});
+
+module.exports = Product;
