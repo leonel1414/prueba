@@ -99,4 +99,3 @@ Product.belongsTo(sequelize.models.category);
 
 module.exports = Product;
 
-//39:23

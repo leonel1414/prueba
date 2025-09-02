@@ -55,7 +55,7 @@ const getProductosId = async (req, res) => {
     const {id} = req.params;
 
     try {
-        const producto = await model.findById(id);
+        const producto = await model.findByPk(id);
         res.render('productos/show', { producto });
 
         if(!producto){
