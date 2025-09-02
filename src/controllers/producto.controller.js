@@ -73,8 +73,11 @@ const edit = async (req, res) =>{
         const {id} = req.params;
 
     try {
-        const producto = await model.findById(id);
-        res.render('productos/edit', { producto });
+
+        const producto = await model.findByPk(id);
+        const categorias = await modelCategory.findAll();
+
+        res.render('productos/edit', { producto, categorias });
 
         if(!producto){
             return res.status(404).send('Producto no encontrado');
@@ -89,10 +92,10 @@ const edit = async (req, res) =>{
 
 const update = async (req , res) =>{
         const {id} = req.params;
-        const {name} = req.body;
+        const {name, categoryId} = req.body;
 
     try {
-        const result = await model.update(id, name);
+        const result = await model.update({name, categoryId}, {where: {id}});
         res.redirect('/productos');
 
     } catch (error) {
@@ -106,7 +109,7 @@ const destroy = async (req, res) => {
     const {id} = req.params;
 
     try {
-        const result = await model.destroy(id);
+        const result = await model.destroy({where: {id}});
         res.redirect('/productos');
 
     } catch (error) {
