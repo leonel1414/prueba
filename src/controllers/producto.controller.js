@@ -11,25 +11,26 @@ const create = async (req,res) =>{
 
     } catch (error) {
 
-        console.error(error);
+       // console.error(error);
         res.status(500).send('Error en categorias');
     }
 }
 
 const store = async (req,res) => {
     const {name,categoryId} = req.body;
+    const {filename: image} = req.file;
 
     try {
 
-        const result = await model.create({name,categoryId});
+        const result = await model.create({name,image,categoryId});
 
-        console.log(result);
+        //console.log(result);
 
         res.redirect('/productos');
 
     } catch (error) {
 
-        console.error(error);
+        // console.error(error);
 
         res.status(500).send('Error al crear el producto');
     }
