@@ -7,6 +7,7 @@
         <thead>
         <tr>
             <th>Nombre</th>
+            <th>Imagen</th>
             <th>Categoria</th>
             <th></th>
         </tr>
@@ -16,6 +17,9 @@
         <tr>
             <td>
             <a href="/productos/<%= producto.id %>"><%= producto.name %></a>
+            </td>
+            <td>
+                <img width="100" src="/uploads/<%= producto.image ?? 'no-photo.jpg' %>" alt="<%= producto.name %>">
             </td>
             <td><%= producto.category ? producto.category.name : 'Sin categoria' %></td>
             <td class="cell-inline">
