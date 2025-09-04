@@ -1,6 +1,6 @@
 <h1>Editar Producto</h1>
 
-<form class="form" action="/productos/<%= producto.id %>?_method=PUT" method="post">
+<form class="form" action="/productos/<%= producto.id %>?_method=PUT" method="post" enctype="multipart/form-data">
     <div class="form__group">
         <label class="form__label" for="nombre">Nombre:</label>
         <input class="form__input" type="text" name="name" id="nombre" value="<%= producto.name %>"/>

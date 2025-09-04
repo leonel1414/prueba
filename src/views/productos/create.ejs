@@ -1,9 +1,13 @@
 <h1>Crear Producto</h1>
 
-<form class="form" action="/productos" method="post">
+<form class="form" action="/productos" method="post" enctype="multipart/form-data">
     <div class="form__group">
         <label class="form__label" for="nombre">Nombre:</label>
         <input class="form__input" type="text" name="name" id="nombre" />
+    </div>
+    <div>
+        <label for="form__label" for="image" >Imagen:</label>
+        <input type="file" class="form__input" accept="image/*" name="image" id="image">
     </div>
     <div class="form__group">
         <label for="form__label" for="categoryID">Categoria:</label>

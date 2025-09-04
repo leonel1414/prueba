@@ -1,9 +1,25 @@
 const express = require('express');
 const controller = require('../controllers/producto.controller');
+const multer = require('multer');
+const path = require('path');
 const router = express.Router();
 
+//const upload = multer({ dest: 'uploads/' });
+
+const storage = multer.diskStorage({
+    destination:(req, file, cb) => {
+        cb(null, 'public/uploads/');
+    },
+    filename:(req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const upload = multer({ storage });
+
+
 router.get('/create',controller.create);
-router.post('/',controller.store);
+router.post('/',upload.single('image'),controller.store);
 
 
 router.get('/',controller.getProductos);
