@@ -1,5 +1,6 @@
-
+const path = require('path');
 const model = require('../models/product');
+const fs = require('fs');
 const modelCategory = require('../models/category');
 
 const create = async (req,res) =>{
@@ -94,9 +95,23 @@ const edit = async (req, res) =>{
 const update = async (req , res) =>{
         const {id} = req.params;
         const {name, categoryId} = req.body;
+       // const {filename: image} = req.file;
+
+        let image;
+
+        if(req.file){
+            image = req.file.filename;
+        }
 
     try {
-        const result = await model.update({name, categoryId}, {where: {id}});
+        const producto = await model.findByPk(id);
+
+        if(producto.image){
+            const imagePath = path.resolve(__dirname, '../../public/uploads/', producto.image);
+            fs.unlinkSync(imagePath);
+        }
+
+        const result = await model.update({name, categoryId, image}, {where: {id}});
         res.redirect('/productos');
 
     } catch (error) {
