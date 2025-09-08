@@ -14,5 +14,12 @@
             <% }); %>
         </select>
     </div>
+        <div>
+        <label for="form__label" for="image" >Imagen:</label>
+        <input type="file" class="form__input" accept="image/*" name="image" id="image">
+        <div>
+            <img width="100" src="/uploads/<%= producto.image ?? 'no-photo.jpg' %>" alt="<%= producto.name %>">
+        </div>
+    </div>
     <button class="button button--primary" type="submit">Guardar</button>
 </form>

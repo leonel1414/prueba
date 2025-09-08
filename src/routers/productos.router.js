@@ -26,7 +26,7 @@ router.get('/',controller.getProductos);
 router.get('/:id',controller.getProductosId);
 
 router.get('/:id/edit',controller.edit);
-router.put('/:id',controller.update);
+router.put('/:id',upload.single('image'),controller.update);
 
 router.delete('/:id',controller.destroy);
 
