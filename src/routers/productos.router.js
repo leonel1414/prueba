@@ -15,7 +15,31 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage, fileFilter: (req,file,cb) =>{
+    /*
+    if(path.extname(file.originalname) != ".jpg"){
+        return cb(new Error('Solo se permiten archivos .jpg'));
+    }
+
+    if(file.mimetype != "image/jpeg" && file.mimetype != "image/jpeg"){
+        return cb(new Error('Solo se permiten archivos .jpg'));
+    }*/
+
+    const fileTypes = /jpeg|jpg|png/;
+    
+    const mimetype = fileTypes.test(file.mimetype);
+
+    const extname = fileTypes.test(
+        path.extname(file.originalname).toLowerCase()
+    );
+
+    if(mimetype && extname){
+        return cb(null, true);
+    }
+    cb(new Error("Error: El archivo debe ser una imagen valida"), false);
+    },
+    limits:{fileSize: 1024 * 1024 * 5},
+});
 
 
 router.get('/create',controller.create);
