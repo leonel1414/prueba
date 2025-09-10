@@ -2,6 +2,7 @@ const path = require('path');
 const model = require('../models/product');
 const fs = require('fs');
 const modelCategory = require('../models/category');
+const sharp = require('sharp');
 
 const create = async (req,res) =>{
 
@@ -19,10 +20,11 @@ const create = async (req,res) =>{
 
 const store = async (req,res) => {
     const {name,categoryId} = req.body;
-    const {filename: image} = req.file;
+    //const {filename: image} = req.file;
 
     try {
 
+        let image = await upload(req.file);
         const result = await model.create({name,image,categoryId});
 
         //console.log(result);
@@ -97,13 +99,11 @@ const update = async (req , res) =>{
         const {name, categoryId} = req.body;
        // const {filename: image} = req.file;
 
-        let image;
-
-        if(req.file){
-            image = req.file.filename;
-        }
+        
 
     try {
+
+        let image = await upload(req.file);
         const producto = await model.findByPk(id);
 
         if(producto.image){
@@ -132,6 +132,19 @@ const destroy = async (req, res) => {
         console.log(error);
         res.status(500).send('Error al eliminar el producto');
     }
+};
+
+const upload = async (file) => {
+
+    if(!file){
+        return null;
+    }
+    const imageName = Date.now() + path.extname(file.originalname);
+    const imagePath = path.resolve(__dirname, '../../public/uploads/', imageName);
+
+    await sharp(file.buffer).resize(300).toFile(imagePath);
+
+    return imageName;
 };
 
 module.exports = {
